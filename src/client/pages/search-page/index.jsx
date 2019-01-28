@@ -1,13 +1,13 @@
 import React from "react";
 import "./index.scss";
 import { Container, Segment, Icon, Button, Image } from "semantic-ui-react";
-import SearchSummary from "client/components/search-summary";
-import RankingBar from "client/components/ranking-bar";
-import PropertyListItem from "client/components/property-list-item";
-import Pagination from "client/components/pagination";
-import Header from "client/components/header";
-import QuickFilter from "client/components/quick-filter";
-import MapGlobalWidget from "client/components/map-global-widget";
+import SearchSummary from "../../components/search/search-summary";
+import RankingBar from "../../components/search/ranking-bar";
+import PropertyListItem from "../../components/property/property-list-item";
+import Pagination from "../../components/common/pagination";
+import Header from "../../components/header";
+import QuickFilter from "../../components/search/quick-filter";
+import MapGlobalWidget from "../../components/map/map-global-widget";
 import { connect } from "react-redux";
 import { mapStateToProps } from "./container";
 import sorry from "./img/nothing.png";
@@ -45,8 +45,8 @@ class SearchPage extends React.Component {
     componentDidMount = () => {
     };
 
-    listItemsRender = () =>
-        this.state.properties.map(property => (
+    listItemsRender = () => {
+        return this.state.properties.map(property => (
             <PropertyListItem
                 key={property.id}
                 propertyItemData={property}
@@ -57,7 +57,8 @@ class SearchPage extends React.Component {
                 itemIndex={this.state.properties.indexOf(property)}
             />
         ));
-    
+    }
+
 
     handleSearchResults = searchData => {
         let properties = [];
@@ -233,7 +234,7 @@ class SearchPage extends React.Component {
                                             style={{ marginTop: 20 }}
                                         >
                                             <MapGlobalWidget
-                                                properties={this.state.mapProp}
+                                                properties={this.state.properties}
                                                 startPosition={
                                                     this.state.mapProp.length
                                                         ? {
